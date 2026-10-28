@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue — Ma Page</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e293b;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .25;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .glow-1 { background: var(--accent); top: -150px; left: -150px; }
+    .glow-2 { background: var(--accent2); bottom: -150px; right: -150px; }
+
+    main {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 720px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      line-height: 1.15;
+      background: linear-gradient(90deg, #fff, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    p.lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: .9rem 2.2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0f172a;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 8px 30px rgba(56, 189, 248, .3);
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(129, 140, 248, .45); }
+
+    .card-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      flex: 1 1 160px;
+      max-width: 200px;
+      padding: 1.2rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      transition: background .2s ease;
+    }
+    .card:hover { background: rgba(255,255,255,.08); }
+    .card .icon { font-size: 1.6rem; margin-bottom: .5rem; }
+    .card h3 { font-size: .95rem; margin-bottom: .3rem; }
+    .card p { font-size: .8rem; color: var(--muted); line-height: 1.4; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <main>
+    <span class="badge">✨ Nouveau</span>
+    <h1>Bienvenue sur votre page</h1>
+    <p class="lead">Une page moderne, rapide et élégante. Prête à accueillir votre contenu et vos publicités.</p>
+    <a href="#" class="cta">Commencer</a>
+
+    <div class="card-row">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Rapide</h3>
+        <p>Chargement instantané, aucune dépendance.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Responsive</h3>
+        <p>S'adapte à tous les écrans, mobile et PC.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Moderne</h3>
+        <p>Design épuré avec effets de lumière.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2026 — Tous droits réservés</footer>
+</body>
+</html>
