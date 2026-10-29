@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protéger un formulaire quand on n'a pas de backend — Danny, carnet de chantier</title>
+  <meta name="description" content="Le formulaire est la seule partie vivante d'un site statique, et c'est là que le spam arrive. Ce que reCAPTCHA v3 fait et ne fait pas sans serveur, et l'option réaliste.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<main class="wrap-prose">
+  <a class="back" href="/">Retour au sommaire</a>
+
+  <header class="article-head">
+    <div class="rubrique">Technique</div>
+    <h1>Protéger un formulaire quand on n'a pas de backend</h1>
+    <p class="chapo">Le formulaire est la seule partie vivante d'un site statique, et c'est là que le spam arrive. Ce que reCAPTCHA v3 fait et ne fait pas sans serveur, et l'option que j'ai retenue.</p>
+    <div class="article-meta">
+      <span><b>4e article</b></span>
+      <time datetime="2026-10-08">8 octobre 2026</time>
+      <span>6 min de lecture</span>
+    </div>
+  </header>
+
+  <figure class="cover-fig">
+    <img src="https://picsum.photos/id/2/1200/560" alt="Un ordinateur portable ouvert sur un bureau" width="1200" height="560" loading="lazy">
+    <figcaption>Le formulaire : trois champs, et toute la question de la confiance d'un site statique.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Sur un site statique, tout est calme : pages servies depuis un CDN, contenu figé, personne pour attaque le jour où vous ne regardez pas. Sauf une pièce : le formulaire. C'est la seule partie qui écoute, la seule qui accepte l'entrée d'un inconnu, et de fait la seule que les robots testent avec régularité. La question finit toujours par se poser de la même façon : <mark>comment filtrer des messages indésirables quand je n'ai pas de code à moi qui tourne sur un serveur ?</mark> Voici ce que j'en ai appris en l'installant sur ce carnet.</p>
+
+    <h2>Le honeypot, et pourquoi il ne suffit plus</h2>
+    <p>Le remède classique ne coûte rien : un champ piège, caché en CSS, que l'humain ne remplit jamais et que le robot, lui, remplit mécaniquement. Le serveur — ou ici, le service qui reçoit le formulaire — rejette silencieusement toute soumission dans laquelle ce champ est rempli. C'est honnête, ça marche encore en partie, et je le mets partout d'office.</p>
+    <p>Mais le filet est fragile. Les robots modernes exécutent le JavaScript, rendent la page dans un navigateur réel, calculent le rendu CSS — et ne tombent donc plus systématiquement dans un piège basé sur la mise en forme. Quand les soumissions indésirables passent le honeypot, il faut un deuxième étage, et le deuxième étage s'appelle confiance.</p>
+
+    <h2>Ce que reCAPTCHA v3 fait vraiment</h2>
+    <p><a href="https://developers.google.com/recaptcha/docs/v3" rel="noopener">reCAPTCHA v3</a> ne pose aucune question à l'utilisateur : un script observe le comportement sur la page, attribue un token à l'envoi du formulaire, et le site peut demander à Google un <em>score</em> entre 0 et 1 pour ce token. Un vrai visiteur scrupuleux prend un score haut, un robot en voilà un bas. C'est propre, invisible, et gratuit — exactement ce qu'un petit site cherche.</p>
+    <p>Le détail qui change tout, c'est la verification. Ce score connu, il faut le lire, et cette lecture exige la clé secrète — <em>secrete key</em> — qui ne doit jamais quitter un serveur à moi. Un site statique n'en a pas. On peut donc capter un token côté client et l'afficher, mais agir sur le score (refuser le message) suppose une étape serveur, même minuscule. Sans elle, on a un badge décoratif : le robot s'en moque, il peut reposter autant de fois qu'il veut.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 170" role="img" aria-label="Flux : navigateur, service de formulaire, vérification du token chez Google" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="48" width="140" height="60" fill="#E7E4DA" stroke="#1B2540"/>
+        <text x="100" y="74" font-family="Bricolage Grotesque" font-size="13" font-weight="800" text-anchor="middle" fill="#10182B">navigateur</text>
+        <text x="100" y="92" font-family="Source Serif 4" font-size="10" text-anchor="middle" fill="#5D6475">token + message</text>
+        <rect x="250" y="48" width="140" height="60" fill="#F7C948" stroke="#1B2540"/>
+        <text x="320" y="74" font-family="Bricolage Grotesque" font-size="13" font-weight="800" text-anchor="middle" fill="#10182B">service de formulaire</text>
+        <text x="320" y="92" font-family="Source Serif 4" font-size="10" text-anchor="middle" fill="#5D6475">tient la clé secrète</text>
+        <rect x="470" y="48" width="140" height="60" fill="#E7E4DA" stroke="#1B2540"/>
+        <text x="540" y="74" font-family="Bricolage Grotesque" font-size="13" font-weight="800" text-anchor="middle" fill="#10182B">Google</text>
+        <text x="540" y="92" font-family="Source Serif 4" font-size="10" text-anchor="middle" fill="#5D6475">renvoie le score</text>
+        <line x1="170" y1="78" x2="245" y2="78" stroke="#1B2540" stroke-width="2"/>
+        <line x1="390" y1="78" x2="465" y2="78" stroke="#1B2540" stroke-width="2"/>
+        <line x1="320" y1="108" x2="320" y2="140" stroke="#1B2540" stroke-width="2"/>
+        <text x="320" y="156" font-family="Source Serif 4" font-size="10" font-style="italic" text-anchor="middle" fill="#5D6475">score &gt; seuil : le message passe. Score bas : rien ne sort.</text>
+      </svg>
+      <figcaption>Là où la clé secrète vit, là où la décision se prend : sur le maillon que je n'ai pas.</figcaption>
+    </figure>
+
+    <h2>L'option réaliste : un service qui vérifie pour nous</h2>
+    <p>Ce maillon intermédiaire existe tout fait. Les plateformes de formulaire — <a href="https://formspree.io" rel="noopener">Formspree</a> en est l'exemple qui me sert le plus, Netlify Forms joue le même rôle quand le site est chez Netlify — reçoivent la soumission HTTPS à notre place, font tourner la vérification reCAPTCHA du côté où elle a un sens, et nous envoient le message filtré par mail. La forme de la solution reste statique côté site : un point d'API externe dans l'attribut <code>action</code> du formulaire, rien de plus.</p>
+    <p>Je note aussi <a href="https://developers.cloudflare.com/turnstile/" rel="noopener">Cloudflare Turnstile</a>, qui joue le même rôle que reCAPTCHA v3 sans la part de données de comportement que le premier remonte à Google. Pour un projet européen sensible à la localisation des données, c'est une piste que je garde sous la main.</p>
+
+    <aside class="note">
+      <b>À retenir :</b> un honeypot + un service de formulaire avec vérification intégrée couvre l'essentiel des besoins d'un petit site. Ajouter reCAPTCHA à la main, sans maillon serveur quelque part, ne protège rien : c'est un badge décoratif.
+    </aside>
+
+    <h2>Ce que je retiens du chantier</h2>
+    <p>La leçon générale dépasse le cas reCAPTCHA : sur un site statique, <mark>toute fonction qui doit <em>décider</em> doit vivre sur un maillon qui peut le faire légitimement</mark>, et ce maillon sera soit un service géré, soit un petit serveur. Le débat « statique ou pas » traîne des années parce qu'on mélange deux besoins distincts : publier n'a jamais eu besoin de serveur, décider si. Un formulaire de contact est typiquement les deux : la présentation du champ est statique, le filtrage des entrées est une décision. Le site reste ce qu'il est ; la décision, elle, s'abrite chez un tiers sérieux.</p>
+  </div>
+
+  <section class="suite" aria-label="Dans le même carnet">
+    <h2>Dans le même carnet</h2>
+    <ul>
+      <li><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a><span class="rubrique">Technique — 29 oct. 2026</span></li>
+      <li><a href="/articles/garder-les-choses-simples.html">Pourquoi je garde les choses simples sur le web</a><span class="rubrique">Web — 15 oct. 2026</span></li>
+    </ul>
+    <div class="bio">
+      <b>Danny</b> — développeur et chef de projet. Je tiens ce carnet ouvert : notes de chantier, choix techniques et ce que je construis en ce moment. On discute ici ou sur <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>.
+    </div>
+  </section>
+</main>
+
+<div class="pub">
+  <!-- BEGIN AADS AD UNIT 2460332 -->
+  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+    <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
+      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+  </div>
+  <!-- END AADS AD UNIT 2460332 -->
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="/">Sommaire</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

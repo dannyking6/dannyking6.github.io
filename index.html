@@ -1,424 +1,137 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <meta name="description" content="Blog de Danny — notes, projets, technique et chantiers, avec des articles réguliers et une sélection de travaux." />
-  <title>Blog de Danny — Notes, projets et chantiers</title>
-  <style>
-    :root{
-      --bg:#0b0f1c;
-      --panel:#11162b;
-      --line:rgba(255,255,255,.08);
-      --ink:#f4f6fb;
-      --muted:#9da3c2;
-      --accent:#6ee7ff;
-      --accent2:#a0a5ff;
-      --warm:#ffd877;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(1800px 800px at 20% -10%, rgba(110,231,255,.12), transparent 60%),
-        radial-gradient(1600px 700px at 110% 10%, rgba(160,165,255,.14), transparent 60%),
-        linear-gradient(180deg,#0a0f1c,#070a14);
-      min-height:100vh;
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-    }
-    nav{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter:blur(12px);
-      background:rgba(11,15,28,.65);
-      border-bottom:1px solid var(--line);
-    }
-    .nav-inner{
-      max-width:1120px;margin:0 auto;padding:.7rem 1.4rem;
-      display:flex;align-items:center;justify-content:space-between;gap:1rem;
-    }
-    .brand{
-      font-weight:700;letter-spacing:.02em;
-      display:flex;align-items:center;gap:.5rem;
-      color:var(--ink);
-    }
-    .brand .dot{
-      width:10px;height:10px;border-radius:50%;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 0 14px rgba(110,231,255,.6);
-    }
-    .nav-links{
-      display:flex;gap:1.4rem;
-      font-size:.95rem;color:var(--muted);
-    }
-    .nav-links a{
-      color:inherit;text-decoration:none;transition:color .2s ease;
-    }
-    .nav-links a:hover{color:var(--accent)}
-    main{max-width:1120px;margin:0 auto;padding:0 1.4rem}
-
-    section{padding:5rem 0;border-top:1px solid var(--line)}
-    .eye{
-      text-align:center;margin:6rem 0 3rem;
-    }
-    .eye h1{
-      font-size:clamp(2.4rem,6vw,3.8rem);font-weight:800;letter-spacing:-.02em;
-      background:linear-gradient(90deg,var(--ink),var(--accent));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .eye p{
-      color:var(--muted);max-width:680px;margin:1rem auto 0;font-size:1.1rem;
-    }
-
-    .hero-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
-      margin-top:1.5rem;
-    }
-    .hero-text h2{
-      font-size:1.8rem;font-weight:700;margin:.5rem 0 .75rem;
-    }
-    .hero-text p{color:var(--muted);max-width:520px}
-    .cta-group{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
-    .btn{
-      display:inline-flex;align-items:center;gap:.5rem;
-      padding:.8rem 1.4rem;border-radius:12px;font-weight:600;font-size:.95rem;
-      text-decoration:none;border:1px solid transparent;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
-      cursor:pointer;background:var(--panel);
-    }
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#06121f}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(110,231,255,.3)}
-    .btn-ghost{border-color:var(--line);color:var(--ink)}
-    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-    .avatar{
-      width:100%;aspect-ratio:4/5;
-      border-radius:18px;
-      background:linear-gradient(135deg,#1e2a44,#0d1226);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--muted);font-size:.9rem;
-      border:1px solid var(--line);
-      position:relative;overflow:hidden;
-    }
-    .avatar::after{
-      content:"";position:absolute;inset:0;
-      background:radial-gradient(circle at 30% 20%,rgba(110,231,255,.25),transparent 60%);
-      pointer-events:none;
-    }
-
-    .feature-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;
-      margin-top:2.5rem;
-    }
-    .feature{
-      background:var(--panel);border:1px solid var(--line);border-radius:14px;
-      padding:1.4rem;
-    }
-    .feature .ico{font-size:1.7rem;margin-bottom:.7rem}
-    .feature h3{font-size:1.05rem;margin-bottom:.4rem}
-    .feature p{color:var(--muted);font-size:.9rem;line-height:1.55}
-
-    .card{
-      background:var(--panel);border:1px solid var(--line);border-radius:14px;
-      padding:1.4rem;display:flex;gap:1rem;align-items:flex-start;
-      transition:border-color .2s ease,transform .2s ease;
-    }
-    .card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .card .tag{
-      display:inline-block;padding:.2rem .6rem;border-radius:8px;
-      font-size:.75rem;font-weight:600;background:rgba(110,231,255,.12);
-      color:var(--accent);margin-bottom:.6rem;
-    }
-    .card h3{font-size:1.05rem;margin-bottom:.4rem}
-    .card p{color:var(--muted);font-size:.9rem;line-height:1.55}
-
-    .stats{
-      display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
-      margin:3rem 0 1rem;
-    }
-    .stat{
-      text-align:center;padding:.6rem 1.4rem;
-      background:var(--panel);border:1px solid var(--line);border-radius:12px;
-    }
-    .stat .num{font-size:1.7rem;font-weight:800;color:var(--accent)}
-    .stat .label{font-size:.8rem;color:var(--muted);margin-top:.2rem}
-
-    .form-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:1rem;
-      max-width:780px;margin:1.2rem auto 0;
-    }
-    .field{display:flex;flex-direction:column;gap:.4rem}
-    .field.full{grid-column:1/-1}
-    label{font-size:.9rem;color:var(--muted)}
-    input,textarea{
-      background:#0a0e1c;border:1px solid var(--line);color:var(--ink);
-      padding:.8rem 1rem;border-radius:10px;font:inherit;
-      outline:none;transition:border-color .2s ease,box-shadow .2s ease;
-    }
-    input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(110,231,255,.15)}
-    textarea{resize:vertical;min-height:120px}
-    .submit{
-      margin-top:1.2rem;background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#06121f;border:none;cursor:pointer;font-weight:700;
-      padding:.85rem 1.4rem;border-radius:12px;font-size:1rem;
-      transition:transform .2s ease,box-shadow .2s ease;
-    }
-    .submit:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(110,231,255,.3)}
-
-    footer{
-      border-top:1px solid var(--line);padding:2.2rem 0;margin-top:3rem;
-      text-align:center;color:var(--muted);font-size:.85rem;
-    }
-    .links-social{
-      list-style:none;display:flex;justify-content:center;gap:1.2rem;margin-bottom:.8rem;
-    }
-    .links-social a{
-      color:var(--muted);text-decoration:none;transition:color .2s ease;
-    }
-    .links-social a:hover{color:var(--accent)}
-
-    @media (max-width:760px){
-      .hero-grid{grid-template-columns:1fr;gap:1.5rem}
-      .nav-links{display:none}
-      .form-grid{grid-template-columns:1fr}
-    }
-
-    .hide{display:none}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danny — carnet de chantier</title>
+  <meta name="description" content="Le carnet de chantier de Danny : articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design. Thème numéro 07 — octobre 2026.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <meta name="theme-color" content="#F1EFE8">
+  <meta property="og:title" content="Danny — carnet de chantier">
+  <meta property="og:description" content="Articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-  <nav aria-label="Navigation principale">
-    <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Danny — accueil">
-        <span class="dot" aria-hidden="true"></span>
-        Danny
-      </a>
-      <ul class="nav-links" role="list">
-        <li><a href="#a-propos">À propos</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#realisations">Réalisations</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/" class="on">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<div class="masthead">
+  <div class="mast-wrap">
+    <div class="mast-meta">
+      <span>Numéro 07 — octobre 2026</span>
+      <span>Publication : <time datetime="2026-10-29">29 oct. 2026</time></span>
     </div>
-  </nav>
-
-  <main id="top">
-
-    <section aria-labelledby="hero-heading">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <p class="tagline" style="color:var(--accent);letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;font-weight:700">Profil · Portfolio · Contact</p>
-          <h2 id="hero-heading" style="font-size:clamp(2rem,5vw,2.6rem);font-weight:800;letter-spacing:-.01em;margin-top:.6rem">Blog de Danny</h2>
-          <p>Notes de chantier, technique, et ce que je construis en ce moment. Un carnet ouvert, pas une vitrine parfaitement polie.</p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="#contact">Bonne prise de contact</a>
-            <a class="btn btn-ghost" href="#articles">Articles</a>
-          </div>
-        </div>
-        <div class="avatar" role="img" aria-label="Photo de profil de Danny">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-            <circle cx="40" cy="30" r="15" stroke="#9da3c2" stroke-width="2"/>
-            <path d="M12 64c0-16 11.8-24.5 28-24.5s28 8.5 28 24.5" stroke="#9da3c2" stroke-width="2" fill="none"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="stats" id="stats">
-        <div class="stat"><div class="num">6+</div><div class="label">Années d'expérience</div></div>
-        <div class="stat"><div class="num">40+</div><div class="label">Projets livrés</div></div>
-        <div class="stat"><div class="num">12</div><div class="label">Clients accompagnés</div></div>
-        <div class="stat"><div class="num">100%</div><div class="label">Sites déployés & maintenus</div></div>
-      </div>
-    </section>
-
-    <section id="a-propos" aria-labelledby="apropos-heading">
-      <div class="eye">
-        <h2 id="apropos-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Qui je suis</h2>
-        <p>Je combine conception produit, développement frontend et coordination technique pour transformer une idée en site ou application fonctionnelle, sans perdre de vue la qualité et la clarté.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature">
-          <div class="ico">🎨</div>
-          <h3>Design & UI</h3>
-          <p>Hiérarchie visuelle propre, Navigation fluide, Expérience cohérente sur mobile et desktop.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">⚙️</div>
-          <h3>Développement</h3>
-          <p>HTML, CSS et JavaScript modernes, déploiement GitHub Pages, maintenance et évolutions continues.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">🤝</div>
-          <h3>Accompagnement</h3>
-          <p>Structuration du projet, définition des priorités, livraison progressive et suivi post-lancement.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" aria-labelledby="services-heading">
-      <div class="eye">
-        <h2 id="services-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Ce que je propose</h2>
-        <p>Des prestations précises, adaptées aux besoins réels plutôt qu'à un catalogue générique.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature">
-          <div class="ico">🌐</div>
-          <h3>Site vitrine / Portfolio</h3>
-          <p>Site rapide, responsive et facile à mettre à jour, parfait pour se présenter ou présenter une activité.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">📱</div>
-          <h3>Refonte interface</h3>
-          <p>Nettoyage du visuel, amélioration de la lisibilité et des parcours utilisateurs existants.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">📈</div>
-          <h3>Optimisation & déploiement</h3>
-          <p>Réduction du poids, correction des points bloquants et mise en production sur GitHub Pages.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">🛠️</div>
-          <h3>Support & maintien</h3>
-          <p>Ajustements, corrections et petites évolutions après la mise en ligne.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="articles" aria-labelledby="articles-heading">
-      <div class="eye">
-        <h2 id="articles-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Articles récents</h2>
-        <p>Un mélange de technique, de notes de projet, et de ce qui me préoccupe pour l'instant.</p>
-      </div>
-      <article class="post">
-        <span class="post-tag">Technique</span>
-        <div>
-          <span class="post-date">29 oct. 2026</span>
-          <h3>Tenir un site sans serveur, quand même sérieux</h3>
-          <p>Quelques remarques sur le fait de publier depuis GitHub Pages sans perdre en lisibilité, en cohérence, et sans toujours chercher une infrastructure en arrière-plan.</p>
-          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-      <article class="post">
-        <span class="post-tag">Projet</span>
-        <div>
-          <span class="post-date">22 oct. 2026</span>
-          <h3>Ce qui change quand on parallelise trop tôt</h3>
-          <p>Une note sur les gestes de conception qui ne passent pas quand on décide de tout produire avant d'avoir une opinion claire.</p>
-          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-      <article class="post">
-        <span class="post-tag">Web</span>
-        <div>
-          <span class="post-date">15 oct. 2026</span>
-          <h3>Pourquoi je garde les choses simples sur le web</h3>
-          <p>Quelques principes qui reviennent souvent : moins de dépendances, moins de mouvement inutile, plus de cohérence dans ce qu'on livre.</p>
-          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-    </section>
-
-    <section id="a-propos" aria-labelledby="apropos-heading" style="border-top:none">
-      <div class="eye">
-        <h2 id="apropos-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Qui je suis</h2>
-        <p>Développeur et responsable de projet, je tiens à la clarté des interfaces et la qualité des livraisons.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature">
-          <div class="ico">🌐</div>
-          <h3>Web & interfaces</h3>
-          <p>Construction de sites et d'applications avec une attention particulière pour la forme et le contenu.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">📝</div>
-          <h3>Écriture & notes</h3>
-          <p>J'utilise ce blog pour garder une trace de mes chantiers et de mes réflexions techniques.</p>
-        </div>
-        <div class="feature">
-          <div class="ico">🛠️</div>
-          <h3>Projets en cours</h3>
-          <p>Je travaille sur des intégrations web, des publications et des petites missions ponctuelles.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" aria-labelledby="contact-heading">
-      <div class="eye">
-        <h2 id="contact-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Contact</h2>
-        <p>Envoyez-moi un message pour un projet, une question ou un premier échange.</p>
-      </div>
-      <form class="form-grid" action="https://formspree.io/f/votre-id" method="post">
-        <div class="field">
-          <label for="cf-name">Nom</label>
-          <input id="cf-name" name="name" type="text" required placeholder="Votre nom" />
-        </div>
-        <div class="field">
-          <label for="cf-email">Email</label>
-          <input id="cf-email" name="email" type="email" required placeholder="vous@exemple.fr" />
-        </div>
-        <div class="field full">
-          <label for="cf-subject">Sujet</label>
-          <input id="cf-subject" name="subject" type="text" placeholder="Projet, question, accompagnement..." />
-        </div>
-        <div class="field full">
-          <label for="cf-message">Message</label>
-          <textarea id="cf-message" name="message" required placeholder="Dites-moi brièvement ce dont vous avez besoin."></textarea>
-        </div>
-        <div class="field full" style="justify-content:flex-end">
-          <button class="submit" type="submit">Envoyer le message</button>
-        </div>
-      </form>
-      <p style="text-align:center;color:var(--muted);font-size:.82rem;margin-top:.6rem">
-        En attendant la configuration du formulaire, vous pouvez aussi me joindre par email.
-      </p>
-    </section>
-
-    <footer>
-      <ul class="links-social">
-        <li><a href="mailto:danny@exemple.fr">Contact</a></li>
-        <li><a href="/articles">Articles</a></li>
-        <li><a href="https://github.com/kingdannydushime1" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
-      <p>© 2026 Danny — Blog. Tout droit réservé.</p>
-    </footer>
-  </main>
-
-  <!-- BEGIN AADS AD UNIT 2460332 -->
-  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-    <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
-      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+    <h1>Nouvelles du chantier web</h1>
+    <p class="standfirst">
+      Un carnet tenu par Danny, développeur et chef de projet. Des choix assumés, des
+      <mark>chantiers qui tournent</mark>, et l'écriture comme outil de travail.
+    </p>
   </div>
-  <!-- END AADS AD UNIT 2460332 -->
+</div>
 
-  <script>
-    (function(){
-      const submit = document.querySelector('.submit');
-      const form = document.querySelector('form');
-      if(submit && form){
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          submit.textContent = 'Message envoyé';
-          submit.style.background = 'linear-gradient(90deg,#4ade80,#2dd4bf)';
-          setTimeout(function(){
-            submit.textContent = 'Envoyer le message';
-            submit.style.background = '';
-            form.reset();
-          }, 2200);
-        });
-      }
-    })();
-    (function(){
-      const postList = document.querySelector('.post-grid');
-      if(postList){
-        postList.querySelectorAll('a.post-link').forEach(function(link){
-          link.addEventListener('click', function(e){
-            e.preventDefault();
-          });
-        });
-      }
-    })();
-  </script>
+<main class="wrap">
+
+  <section aria-label="Article à la une" id="une">
+    <div class="rule-label"><h2>À la une</h2><span class="count">publié ce lundi</span></div>
+    <article class="une">
+      <a class="cover" href="/articles/tenir-un-site-sans-serveur.html" tabindex="-1" aria-hidden="true">
+        <img src="https://picsum.photos/id/180/1200/560" alt="" width="1200" height="560" loading="eager">
+      </a>
+      <div class="une-text">
+        <span class="rubrique">Technique — 29 oct. 2026</span>
+        <h3><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a></h3>
+        <p class="chapo">Publier depuis GitHub Pages sans infrastructure, mais sans perdre la fraîcheur, le cache et le contrôle. Ce que le statique donne, ce qu'il refuse, et les arbitrages qui en découlent.</p>
+        <a class="lire" href="/articles/tenir-un-site-sans-serveur.html">Lire l'article, 7 min de lecture</a>
+      </div>
+    </article>
+  </section>
+
+  <section aria-label="Sommaire des articles" id="sommaire">
+    <div class="rule-label"><h2>Sommaire</h2><span class="count">5 articles — 30 minutes de lecture</span></div>
+    <ol class="sommaire">
+      <li>
+        <a class="entry" href="/articles/tenir-un-site-sans-serveur.html">
+          <span class="no">01</span>
+          <span class="entry-body">
+            <h3>Tenir un site sans serveur, et l'assumer</h3>
+            <p>Ce que GitHub Pages donne et refuse quand on publie pour de vrai.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-29">29 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/paralleliser-trop-tot.html">
+          <span class="no">02</span>
+          <span class="entry-body">
+            <h3>Ce qui se passe quand on parallélise trop tôt</h3>
+            <p>Trois chantiers lancés le même matin, trois moitiés de chantier vécues : l'ordre qui marche.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-22">22 oct. 2026</time><span class="rubrique">Projet</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/garder-les-choses-simples.html">
+          <span class="no">03</span>
+          <span class="entry-body">
+            <h3>Pourquoi je garde les choses simples sur le web</h3>
+            <p>Le coût caché d'une dépendance, un budget chiffré, et la simplicité comme capacité à débugger.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-15">15 oct. 2026</time><span class="rubrique">Web</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/formulaire-sans-backend.html">
+          <span class="no">04</span>
+          <span class="entry-body">
+            <h3>Protéger un formulaire quand on n'a pas de backend</h3>
+            <p>Honeypot, reCAPTCHA v3 et services gérés : où vit la décision quand le site n'a pas de serveur.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-08">8 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/design-qui-se-ressemble.html">
+          <span class="no">05</span>
+          <span class="entry-body">
+            <h3>Choisir un design quand tout se ressemble</h3>
+            <p>Partir du matériau du sujet, passer un seul geste signature, et savoir s'arrêter.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-01">1er oct. 2026</time><span class="rubrique">Note</span></span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <span class="pub">
+    <!-- BEGIN AADS AD UNIT 2460332 -->
+    <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+      <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
+        style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+    </div>
+    <!-- END AADS AD UNIT 2460332 -->
+  </span>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="#une">À la une</a></span>
+  </div>
+</footer>
+
 </body>
 </html>

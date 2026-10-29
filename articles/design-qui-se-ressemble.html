@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choisir un design quand tout se ressemble — Danny, carnet de chantier</title>
+  <meta name="description" content="Les sites récents partagent le même visage : mêmes cartons, mêmes dégradés, mêmes micro-interactions. Comment partir du sujet plutôt que du gabarit, et décider, puis s'arrêter.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<main class="wrap-prose">
+  <a class="back" href="/">Retour au sommaire</a>
+
+  <header class="article-head">
+    <div class="rubrique">Note</div>
+    <h1>Choisir un design quand tout se ressemble</h1>
+    <p class="chapo">Les sites récents partagent le même visage : mêmes cartons arrondis, mêmes dégradés, mêmes micro-interactions. Comment partir du sujet plutôt que du gabarit — et surtout, savoir s'arrêter.</p>
+    <div class="article-meta">
+      <span><b>5e article</b></span>
+      <time datetime="2026-10-01">1er octobre 2026</time>
+      <span>5 min de lecture</span>
+    </div>
+  </header>
+
+  <figure class="cover-fig">
+    <img src="https://picsum.photos/id/48/1200/560" alt="Une rangée de façades urbaines presque identiques" width="1200" height="560" loading="lazy">
+    <figcaption>Douze façades, un seul gabarit : ce que ça donne quand la forme ne doit rien à son sujet.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Faites le test : ouvrez cinq sites de services récents et cachez les logos. Il reste un site. Le fond sombre presque identique, la couleur d'accent qui tranche de la même façon, les cartes arrondies alignées, la police la même dans la même catégorie. Ce n'est pas le produit d'une mode comme les autres modes — c'est devenu le centre de gravité de tout ce qui se génère rapidement. La conséquence est simple et un peu dérangeante : <mark>un design qui ne fait rien au sujet est interchangeable, donc invisible</mark>.</p>
+
+    <h2>Les détails qui se revèlent</h2>
+    <p>Ce qui trahit une mise en page conçue pour tous les cas à la fois, je les connais d'expérience — et j'en ai livré, au début. Le premier, c'est le carton : le même arrondi pour un résumé de trois mots et un pavé de paragraphe, ce qui signifie que l'arrondi ne porte rien, seulement de la répétition. Le deuxième, c'est le dégradé posé comme signature — l'accent n'en dit rien du sujet, il est le même que celui du site voisin. Le troisième, ce sont les mêmes micro-effets partout : le petit déplacement au survol des cartes, la flèche qui s'ajoute au bout des liens, l'orchestre d'animations d'arrivée. Individuellement, ça se justifie chaque fois ; accumulés, ça fait un tic de fabrique, pas une intention.</p>
+
+    <h2>Partir du sujet, pas du gabarit</h2>
+    <p>Ce qui m'a débloqué, c'est de demander une seule question avant d'ouvrir un fichier CSS : de quoi ce site est-il réellement composé, en matière physique ? Un carnet de chantier est fait de papier, d'encre, de ratures et de surligneur. La suite est presque automatique : un fond de papier, pas un fond de technologie ; un titre qui va chercher dans les lettres de l'affiche de chantier ; les filets du journal plutôt que les dégradés. On ne part pas d'un style, on part d'un matériau — et le style se trouve en descendant.</p>
+    <p>Cette méthode a un avantage qui dépasse l'esthétique : elle rend le design <em>discutable</em>. Un client peut dire « trop de jaune », « la page semble belle broquante », et on sauve l'argument concret, pas un goût. Un design qu'on ne sait pas expliquer, on ne peut pas le corriger non plus ; on part une refonte entière.</p>
+
+    <h2>Décider, puis s'arrêter</h2>
+    <blockquote>Ce qui se pose sur n'importe quel site ne dit rien de celui-ci : ça peut toujours partir. Ce qui se pose sur celui-ci, et nulle part ailleurs, c'est ça qu'on garde.</blockquote>
+    <p>Le point le plus difficile n'est pas d'ajouter, c'est de s'arrêter. Chaque effet qu'on ajoute dilue ceux qui étaient déjà tombés. La règle que j'applique à ce carnet : un seul geste signature — ici, le surligneur jaune qui vient casser la page aux passages importants — et tout le reste reste appliqué discipliné. La typographie fait l'identité, la grille fait la hiérarchie, et l'éventail d'effets n'a pas besoin d'être long pour faire la présence.</p>
+
+    <aside class="note">
+      <b>Instrument de travail :</b> lister cinq sites qu'on admire <em>sans</em> regarder les couleurs ni les polices — uniquement la façon dont l'information est arrangée. C'est rarement le carrousel à effet, c'est souvent la grille et le silence.
+    </aside>
+
+    <p>Il me reste une phrase, celle qui me sert de garde-fou au moment de cliquer sur « déployer » : ce design serait-il encore reconnaissable si j'échangeais l'accent, la typographie et le fond ? Si la réponse est non, alors ce qui reste — la composition, la hiérarchie, le geste signature — c'est ça, et c'est propre.</p>
+  </div>
+
+  <section class="suite" aria-label="Dans le même carnet">
+    <h2>Dans le même carnet</h2>
+    <ul>
+      <li><a href="/articles/garder-les-choses-simples.html">Pourquoi je garde les choses simples sur le web</a><span class="rubrique">Web — 15 oct. 2026</span></li>
+      <li><a href="/articles/paralleliser-trop-tot.html">Ce qui se passe quand on parallélise trop tôt</a><span class="rubrique">Projet — 22 oct. 2026</span></li>
+    </ul>
+    <div class="bio">
+      <b>Danny</b> — développeur et chef de projet. Je tiens ce carnet ouvert : notes de chantier, choix techniques et ce que je construis en ce moment. On discute ici ou sur <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>.
+    </div>
+  </section>
+</main>
+
+<div class="pub">
+  <!-- BEGIN AADS AD UNIT 2460332 -->
+  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+    <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
+      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+  </div>
+  <!-- END AADS AD UNIT 2460332 -->
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="/">Sommaire</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

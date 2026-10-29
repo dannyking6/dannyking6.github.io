@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pourquoi je garde les choses simples sur le web — Danny, carnet de chantier</title>
+  <meta name="description" content="Le coût caché d'une dépendance, un budget réaliste pour une page web, et pourquoi la simplicité n'est pas un minimalisme décoratif mais une capacité à débugger.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<main class="wrap-prose">
+  <a class="back" href="/">Retour au sommaire</a>
+
+  <header class="article-head">
+    <div class="rubrique">Web</div>
+    <h1>Pourquoi je garde les choses simples sur le web</h1>
+    <p class="chapo">Le coût caché d'une dépendance, un budget réaliste pour une page, et ce que la simplicité fait gagner de vrai — pas une question de purisme, une question de fiabilité le mardi après-midi.</p>
+    <div class="article-meta">
+      <span><b>3e article</b></span>
+      <time datetime="2026-10-15">15 octobre 2026</time>
+      <span>6 min de lecture</span>
+    </div>
+  </header>
+
+  <figure class="cover-fig">
+    <img src="https://picsum.photos/id/26/1200/560" alt="Un Bureau épuré : des lunettes et un carnet posés côte à côte" width="1200" height="560" loading="lazy">
+    <figcaption>Deux objets, zéro dépendance : l'état d'esprit recherché.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>La première décision que je prends sur un nouveau site est rarement « quelle bibliothèque ». C'est « est-ce qu'on peut ne pas en prendre ». Ce n'est pas de l'économie de principe ni une position morale sur les débats d'outillage ; c'est un constat banal : sur la majorité des vitrines, portfolios et petits services que je livre, la partie du produit qui a de la valeur tient en quelques pages, un formulaire, et du contenu que quelqu'un de vivant va corriger un jour de semaine. Cette partie-là ne doit rien devoir à un gestionnaire de paquet.</p>
+
+    <h2>Le coût caché d'une dépendance</h2>
+    <p>Le prix affiché d'une bibliothèque est toujours de quelques kilooctets. Le prix réel se découpe en trois lignes qu'on ne voit pas sur le README. D'abord le poids effectif : la bibliothèque arrive rarement seule, elle traîne un utilitaire, puis un second utilitaire pour corriger le premier, et la page pèse soudain 380 ko pour afficher trois cartes. Ensuite la vulnérabilité à distance : un <code>npm audit</code> qui hurle tous les trimestres, pour un usage à trois pour cent de la surface de la bibliothèque. Enfin le plus discret : les changements de rupture. Une API qui change de nom entre deux versions majeures, un framework qui réécrit sa couche de rendu, un mainteneur qui lâche une prise.</p>
+    <blockquote>Une dépendance est un bail signé avec une personne qu'on ne connaît pas, pour un usage plus long que sa disponibilité.</blockquote>
+    <p>Rien de tout ça n'est une raison de rejeter toute bibliothèque. C'est une raison de faire la question autrement : elle ne se pose pas comme « est-ce que cette bibliothèque est bonne » mais comme « <mark>est-ce que la bibliothèque standard ne suffit pas, saisie pour saisie</mark> ? ». Je suis toujours surpris de la proportion de cas où la réponse est oui.</p>
+
+    <h2>Un budget réaliste, chiffré</h2>
+    <p>J'applique sur mes livraisons un budget benché, représentative pour le type de site d'un métier :</p>
+    <ul>
+      <li>HTML + CSS sans framework : 30 à 60 ko compressés, et c'est déjà du système complet — grilles, états, responsive, mode d'impression ;</li>
+      <li>JavaScript du site lui-même : 0 à 10 ko, et encore, uniquement pour les deux ou trois gestes qui le méritent (un menu, un état de formulaire) ;</li>
+      <li>les polices système en premier choix, et les polices web seulement quand elles servent le contenu ;</li>
+      <li>les images : la seule catégorie où un outillage a vraiment de la valeur, et encore sous forme d'optimisation, pas de dépendance de jour.</li>
+    </ul>
+    <p>Sur ces bases, la page d'accueil d'une vitrine arrivent en moins de 150 ko tout compris, images comprises. Je n'ai jamais eu à revenir sur ce chiffre : il tient sur une connexion médiocre et il se charge sur le mobile d'un dimanche.</p>
+
+    <h2>La simplicité n'est pas un décor</h2>
+    <p>Il faut être prudent avec ce mot, il devient facilement une esthétique. Une page vide, un léger nuage gris, beaucoup d'air blancs : ce n'est pas nécessairement simple, elles sont une vitrine nue. Ce que je cherche, je n'ai pas de meilleur mot que « simple » : le jour où un bug arrive — connexion lente, bloquant de poste, curseur d'utilisatrice ou d'utilisateur — le propriétaire du site peut ouvrir le HTML et le corriger, ou au moins le comprendre assez pour me dire ce qui doit changer. La vraie définition de la simplicité : <mark>elle est une capacité à débugger, pas une apparence</mark>.</p>
+    <p>C'est aussi pour ça que je préfère surtout les gestes natifs : un label associé à un champ, un <code>&lt;button&gt;</code> pour un bouton, un lien pour un lien. Ces éléments viennent avec des comportements de base inclus — focus clavier, validation de formulaire, historique de navigation — que je préfère hériter gratuits plutôt que réimplementer en JavaScript « pour le contrôle ».</p>
+
+    <h2>Quand je passe à autre chose</h2>
+    <p>La limite du raisonnement est net. Dès que le produit contient de l'état — panier, filtres sauvegardés, espace connecté, contenu vivant mis à jour par plusieurs personnes —, la bibliothèque de rendu devient un allié raisonnable, et je la prends sans nostalgie. Ce qui serait faux, c'est d'aller chercher un cadre d'application complet pour hériter d'un carrousel de six photos. Le surplus d'infrastructure se paie à chaque évolution du contenu, et le contenu est pourtant la seule partie que le propriétaire touchera jamais.</p>
+
+    <p>En bref : je ne garde les choses simples afin de faire « au plus simple », je les garde parce que tout ce que je réduis côté technologie, je le gagne côté personne qui va vivre avec le site. Sur la durée, c'est le seul échange que je connaisse qui soit durablement gagnant pour les deux camps.</p>
+  </div>
+
+  <section class="suite" aria-label="Dans le même carnet">
+    <h2>Dans le même carnet</h2>
+    <ul>
+      <li><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a><span class="rubrique">Technique — 29 oct. 2026</span></li>
+      <li><a href="/articles/design-qui-se-ressemble.html">Choisir un design quand tout se ressemble</a><span class="rubrique">Note — 1er oct. 2026</span></li>
+    </ul>
+    <div class="bio">
+      <b>Danny</b> — développeur et chef de projet. Je tiens ce carnet ouvert : notes de chantier, choix techniques et ce que je construis en ce moment. On discute ici ou sur <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>.
+    </div>
+  </section>
+</main>
+
+<div class="pub">
+  <!-- BEGIN AADS AD UNIT 2460332 -->
+  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+    <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
+      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+  </div>
+  <!-- END AADS AD UNIT 2460332 -->
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="/">Sommaire</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

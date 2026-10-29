@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ce qui se passe quand on parallélise trop tôt — Danny, carnet de chantier</title>
+  <meta name="description" content="Trois chantiers lancés le même matin donnent trois moitiés de chantiers. Note de projet sur les coûts réels de la C'est le troisième signal qui coûte le cher..">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<main class="wrap-prose">
+  <a class="back" href="/">Retour au sommaire</a>
+
+  <header class="article-head">
+    <div class="rubrique">Projet</div>
+    <h1>Ce qui se passe quand on parallélise trop tôt</h1>
+    <p class="chapo">Trois chantiers lancés le même matin, ça donne trois moitiés de chantier. Une note sur le coût de coordination que tout le monde voit venir et que personne ne chiffre à temps.</p>
+    <div class="article-meta">
+      <span><b>2e article</b></span>
+      <time datetime="2026-10-22">22 octobre 2026</time>
+      <span>6 min de lecture</span>
+    </div>
+  </header>
+
+  <figure class="cover-fig">
+    <img src="https://picsum.photos/id/60/1200/560" alt="Un bureau de travail avec des outils éparpillés" width="1200" height="560" loading="lazy">
+    <figcaption>Cinq chantiers ouverts, aucun clos : l'état d'esprit du début du projet, photographié.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Le scénario a un air de déjà-vu. Le projet démarre, l'énergie est là, le client est disponible, et quelqu'un dit : « on peut bosser en parallèle ». Trois semaines plus tard, on ne sait plus ce qui est validé, deux développeurs ont refactorisé la même page dans deux directions opposées, et la démo du vendredi ressemble à un inventaire de chantiers arrêtés au beau milieu. Ce texte décrit pourquoi ça arrive, et les arbitrages de préférences, c'est du temps qu'on ne facture pas à la technique. de chef de projet, et l'ordre que j'applique depuis pour éviter de le revivre.</p>
+
+    <h2>Le mythe du gain</h2>
+    <p>Le raisonnement qui justifie trop tôt est toujours le même et il a une apparence de bon sens : deux tâches en parallèle, c'est deux tâches qui avancent en même temps, donc un projet qui finit plus vite. Ce qu'il oublie, c'est que <mark>toute tâche transversale se multiplie par deux la minute où on divise l'équipe</mark>. La convention de nommage, la structure de dossier, le format de la donnée : tout ça, qui serait codé une fois dans un flux singulier, est codé deux fois puis fusionné. La fusion est toujours plus longue que la première écriture, parce qu'elle porte des décisions sédimentées des deux côtés, et que personne ne veut se déclarer perdant.</p>
+    <p>Il y a une exception, précise et facile à reconnaître : quand deux parties du produit n'ont <em>aucune interface</em>. Deux brochures PDF, deux jeux de données, deux illustrations. Là, oui, le gain est réel. Le piège, c'est qu'en front-end et en produit, ces interfaces nulles sont rares. Les deux pages d'un même site partagent un écran, un formulaire, une erreur affichée.</p>
+
+    <h2>Comment ça se voit quand c'est déjà trop tard</h2>
+    <p>Les signaux sont reconnaissables, et ils arrivent dans un ordre. D'abord, les branches qui divergent : pas de conflit Git à proprement parler, juste deux notions de « propre » qui se bousculent. Ensuite, les réunions qui deviennent des arbitrages de préférences — et les arbitrages de préférences, c'est du temps qu'on ne facture pas à la technique. Enfin, quand tout va encore mieux, les décisions refaites : la même donnée modélisée deux fois, puis unifiée à grands frais.</p>
+    <p>C'est le troisième signal qui coûte le cher. Un arbitrage fait une demi-heure. Une décision refaite fait un chantier.</p>
+
+    <h2>L'ordre qui marche</h2>
+    <p>Après ce mauvais souvenir, une séquence simple, testée sur plusieurs missions :</p>
+    <ol>
+      <li>un squelette de bout en bout, à travers toutes les pages, même laid grossier — je le borne à trois jours au maximum ;</li>
+      <li>une démonstration de ce squelette au client, même rugueuse, surtout rugueuse, le premier vendredi qui arrive ;</li>
+      <li>puis, et seulement ensuite, les tranches verticales : chaque tranche réunit une page, sa donnée, et ses cas d'erreur.</li>
+    </ol>
+    <p>Cet ordre ne remplace pas le parallélisme, il l'abrite. Une fois le tracé et la donnée fixés, deux personnes peuvent travailler sur deux tranches sans s'entrebattre, parce que les ressources qu'elles partagent existent déjà et tiennent. Le parallélisme redevient un atout une fois ce socle posé, le reste s'aligne de lui-même.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 170" role="img" aria-label="Comparaison : trois chantiers en parallèle contre trois tranches verticales" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="30" width="180" height="46" fill="#E7E4DA" stroke="#1B2540"/>
+        <rect x="30" y="86" width="180" height="46" fill="#E7E4DA" stroke="#1B2540"/>
+        <rect x="230" y="30" width="180" height="46" fill="#E7E4DA" stroke="#1B2540"/>
+        <rect x="230" y="86" width="180" height="46" fill="#E7E4DA" stroke="#1B2540"/>
+        <rect x="430" y="30" width="180" height="46" fill="#F7C948" stroke="#1B2540"/>
+        <rect x="430" y="86" width="180" height="46" fill="#F7C948" stroke="#1B2540"/>
+        <text x="120" y="58" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">chantier 1</text>
+        <text x="320" y="58" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">chantier 2</text>
+        <text x="520" y="58" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">chantier 3</text>
+        <text x="120" y="114" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">fini à 70 %</text>
+        <text x="320" y="114" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">fini à 70 %</text>
+        <text x="520" y="114" font-family="Bricolage Grotesque" font-size="12" font-weight="800" text-anchor="middle" fill="#10182B">fini à 70 %</text>
+        <text x="320" y="160" font-family="Source Serif 4" font-size="10" font-style="italic" text-anchor="middle" fill="#5D6475">210 % d'avancement, 0 % de livraison : l'illusion arithmétique de la parallélisation trop tôt.</text>
+      </svg>
+      <figcaption>Le même projet, cliché trois semaines après le lancement. Les pourcentages avancent, la livraison non.</figcaption>
+    </figure>
+
+    <aside class="note">
+      <b>Garde-fou que j'impose :</b> rien ne part sur un chantier de fond tant que le tracé de base n'a pas été vu en état de marche par la personne qui commande. Pas un prototype de design, pas un schéma : quelque chose qui peut cliquer.
+    </aside>
+
+    <h2>Ce que la démo hebdo règle vraiment</h2>
+    <p>La démonstration de chaque vendredi n'est pas une tradition, elle est le garde-fou qui coûte le moins. Une démo oblige à assembler les travaux en un seul produit, ce qui expose les prises de position divergentes au moment où elles coûtent dix minutes à corriger, pas trois semaines. Elle fait aussi une autre chose, moins discutée : elle laisse le client dire « ce n'est pas ça que j'imaginais » avec un objet sous les yeux, avant que le projet ait pris la coûteuse forme de vingt pages de code cohérentes autour d'un malentendu.</p>
+    <p>J'en tire une règle de taille qui me sert de boussole : <mark>on ne demande jamais à un client d'arbitrer entre deux implémentations</mark>. Ce n'est pas son rang ; c'est le mien, et je dois assumer avoir assemblé trop tôt. Le jour où ce type d'arbitrage arrive, la bonne réaction n'est pas d'ajouter une réunion, c'est de fermer un chantier.</p>
+
+    <h2>En résumé</h2>
+    <p>Paralléliser trop tôt ne gaspille pas du temps de développeur : il transforme des problèmes de produit en problèmes de personne, et ces derniers ne se déboguent pas avec Git. La séquence squelette, démonstration, tranches verticales est banale, connue de tout le monde depuis quinze ans. Elle reste néanmoins la première chose qu'on met de côté quand on est pressé, et c'est précisément quand on est pressé qu'elle rapporte le plus.</p>
+  </div>
+
+  <section class="suite" aria-label="Dans le même carnet">
+    <h2>Dans le même carnet</h2>
+    <ul>
+      <li><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a><span class="rubrique">Technique — 29 oct. 2026</span></li>
+      <li><a href="/articles/design-qui-se-ressemble.html">Choisir un design quand tout se ressemble</a><span class="rubrique">Note — 1er oct. 2026</span></li>
+    </ul>
+    <div class="bio">
+      <b>Danny</b> — développeur et chef de projet. Je tiens ce carnet ouvert : notes de chantier, choix techniques et ce que je construis en ce moment. On discute ici ou sur <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>.
+    </div>
+  </section>
+</main>
+
+<div class="pub">
+  <!-- BEGIN AADS AD UNIT 2460332 -->
+  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+    <iframe data-aa='2460332' src='//acceptable.a-ads.com/2460332/?size=Adaptive'
+      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+  </div>
+  <!-- END AADS AD UNIT 2460332 -->
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="/">Sommaire</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
