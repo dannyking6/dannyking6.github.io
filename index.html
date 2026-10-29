@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Site professionnel de Danny — portrait, expertise, réalisations et contact." />
-  <title>Danny — Developpeur & Chef de Projet</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="description" content="Blog de Danny — notes, projets, technique et chantiers, avec des articles réguliers et une sélection de travaux." />
+  <title>Blog de Danny — Notes, projets et chantiers</title>
   <style>
     :root{
       --bg:#0b0f1c;
@@ -209,11 +210,11 @@
       <div class="hero-grid">
         <div class="hero-text">
           <p class="tagline" style="color:var(--accent);letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;font-weight:700">Profil · Portfolio · Contact</p>
-          <h2 id="hero-heading" style="font-size:clamp(2rem,5vw,2.6rem);font-weight:800;letter-spacing:-.01em;margin-top:.6rem">Bienvenue sur mon espace</h2>
-          <p>Développeur et responsable de projet, je construis des interfaces claires, fiables et pensées pour les équipes comme pour les utilisateurs.</p>
+          <h2 id="hero-heading" style="font-size:clamp(2rem,5vw,2.6rem);font-weight:800;letter-spacing:-.01em;margin-top:.6rem">Blog de Danny</h2>
+          <p>Notes de chantier, technique, et ce que je construis en ce moment. Un carnet ouvert, pas une vitrine parfaitement polie.</p>
           <div class="cta-group">
             <a class="btn btn-primary" href="#contact">Bonne prise de contact</a>
-            <a class="btn btn-ghost" href="#realisations">Voir mes travaux</a>
+            <a class="btn btn-ghost" href="#articles">Articles</a>
           </div>
         </div>
         <div class="avatar" role="img" aria-label="Photo de profil de Danny">
@@ -285,38 +286,61 @@
       </div>
     </section>
 
-    <section id="realisations" aria-labelledby="realisations-heading">
+    <section id="articles" aria-labelledby="articles-heading">
       <div class="eye">
-        <h2 id="realisations-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Quelques réalisations</h2>
-        <p>Une sélection de projets récents, conçus pour être à la fois utiles et visuellement cohérents.</p>
+        <h2 id="articles-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Articles récents</h2>
+        <p>Un mélange de technique, de notes de projet, et de ce qui me préoccupe pour l'instant.</p>
       </div>
+      <article class="post">
+        <span class="post-tag">Technique</span>
+        <div>
+          <span class="post-date">29 oct. 2026</span>
+          <h3>Tenir un site sans serveur, quand même sérieux</h3>
+          <p>Quelques remarques sur le fait de publier depuis GitHub Pages sans perdre en lisibilité, en cohérence, et sans toujours chercher une infrastructure en arrière-plan.</p>
+          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="post">
+        <span class="post-tag">Projet</span>
+        <div>
+          <span class="post-date">22 oct. 2026</span>
+          <h3>Ce qui change quand on parallelise trop tôt</h3>
+          <p>Une note sur les gestes de conception qui ne passent pas quand on décide de tout produire avant d'avoir une opinion claire.</p>
+          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="post">
+        <span class="post-tag">Web</span>
+        <div>
+          <span class="post-date">15 oct. 2026</span>
+          <h3>Pourquoi je garde les choses simples sur le web</h3>
+          <p>Quelques principes qui reviennent souvent : moins de dépendances, moins de mouvement inutile, plus de cohérence dans ce qu'on livre.</p>
+          <a class="post-link" href="#">Lire l'article <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </section>
 
-      <div class="card">
-        <span class="tag">Portfolio</span>
-        <div>
-          <h3>Site personnel moderne</h3>
-          <p>Page d'accueil épurée, navigation fluide, adaptée aux appareils mobiles et aux lecteurs d'écran.</p>
-        </div>
+    <section id="a-propos" aria-labelledby="apropos-heading" style="border-top:none">
+      <div class="eye">
+        <h2 id="apropos-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Qui je suis</h2>
+        <p>Développeur et responsable de projet, je tiens à la clarté des interfaces et la qualité des livraisons.</p>
       </div>
-      <div class="card">
-        <span class="tag">Web · Responsive</span>
-        <div>
-          <h3>Interface administrateur</h3>
-          <p>Tableau de bord clair, avec une mise en page modulaire et une navigation optimisée.</p>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">🌐</div>
+          <h3>Web & interfaces</h3>
+          <p>Construction de sites et d'applications avec une attention particulière pour la forme et le contenu.</p>
         </div>
-      </div>
-      <div class="card">
-        <span class="tag">Déploiement</span>
-        <div>
-          <h3>Publication GitHub Pages</h3>
-          <p>Configuration simple, rendu fiable, mise à jour continue sans serveur intermédiaire.</p>
+        <div class="feature">
+          <div class="ico">📝</div>
+          <h3>Écriture & notes</h3>
+          <p>J'utilise ce blog pour garder une trace de mes chantiers et de mes réflexions techniques.</p>
         </div>
-      </div>
-
-      <div class="stats" style="margin-top:2rem">
-        <div class="stat"><div class="num">Front-end</div><div class="label">HTML / CSS / JS</div></div>
-        <div class="stat"><div class="num">Design</div><div class="label">UI · UX · Accessibilité</div></div>
-        <div class="stat"><div class="num">DevOps léger</div><div class="label">Git · GitHub Pages</div></div>
+        <div class="feature">
+          <div class="ico">🛠️</div>
+          <h3>Projets en cours</h3>
+          <p>Je travaille sur des intégrations web, des publications et des petites missions ponctuelles.</p>
+        </div>
       </div>
     </section>
 
@@ -353,11 +377,11 @@
 
     <footer>
       <ul class="links-social">
-        <li><a href="mailto:danny@exemple.fr">Email</a></li>
+        <li><a href="mailto:danny@exemple.fr">Contact</a></li>
+        <li><a href="/articles">Articles</a></li>
         <li><a href="https://github.com/kingdannydushime1" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="#">LinkedIn</a></li>
       </ul>
-      <p>© 2026 Danny — Site personnel · Tous droits réservés</p>
+      <p>© 2026 Danny — Blog. Tout droit réservé.</p>
     </footer>
   </main>
 
@@ -375,13 +399,23 @@
       if(submit && form){
         form.addEventListener('submit', function(e){
           e.preventDefault();
-          submit.textContent = 'Message envoyé ✓';
+          submit.textContent = 'Message envoyé';
           submit.style.background = 'linear-gradient(90deg,#4ade80,#2dd4bf)';
           setTimeout(function(){
             submit.textContent = 'Envoyer le message';
             submit.style.background = '';
             form.reset();
           }, 2200);
+        });
+      }
+    })();
+    (function(){
+      const postList = document.querySelector('.post-grid');
+      if(postList){
+        postList.querySelectorAll('a.post-link').forEach(function(link){
+          link.addEventListener('click', function(e){
+            e.preventDefault();
+          });
         });
       }
     })();
