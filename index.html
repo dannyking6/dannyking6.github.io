@@ -1,158 +1,383 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenue — Ma Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site professionnel de Danny — portrait, expertise, réalisations et contact." />
+  <title>Danny — Developpeur & Chef de Projet</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg1: #0f172a;
-      --bg2: #1e293b;
-      --accent: #38bdf8;
-      --accent2: #818cf8;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
+    :root{
+      --bg:#0b0f1c;
+      --panel:#11162b;
+      --line:rgba(255,255,255,.08);
+      --ink:#f4f6fb;
+      --muted:#9da3c2;
+      --accent:#6ee7ff;
+      --accent2:#a0a5ff;
+      --warm:#ffd877;
     }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1800px 800px at 20% -10%, rgba(110,231,255,.12), transparent 60%),
+        radial-gradient(1600px 700px at 110% 10%, rgba(160,165,255,.14), transparent 60%),
+        linear-gradient(180deg,#0a0f1c,#070a14);
+      min-height:100vh;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
     }
-
-    .glow {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: .25;
-      z-index: 0;
-      pointer-events: none;
+    nav{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(12px);
+      background:rgba(11,15,28,.65);
+      border-bottom:1px solid var(--line);
     }
-    .glow-1 { background: var(--accent); top: -150px; left: -150px; }
-    .glow-2 { background: var(--accent2); bottom: -150px; right: -150px; }
-
-    main {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-      max-width: 720px;
+    .nav-inner{
+      max-width:1120px;margin:0 auto;padding:.7rem 1.4rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
     }
-
-    .badge {
-      display: inline-block;
-      padding: .4rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.05);
-      font-size: .85rem;
-      color: var(--accent);
-      letter-spacing: .05em;
-      margin-bottom: 1.5rem;
+    .brand{
+      font-weight:700;letter-spacing:.02em;
+      display:flex;align-items:center;gap:.5rem;
+      color:var(--ink);
     }
-
-    h1 {
-      font-size: clamp(2.2rem, 6vw, 3.5rem);
-      line-height: 1.15;
-      background: linear-gradient(90deg, #fff, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+    .brand .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 14px rgba(110,231,255,.6);
     }
+    .nav-links{
+      display:flex;gap:1.4rem;
+      font-size:.95rem;color:var(--muted);
+    }
+    .nav-links a{
+      color:inherit;text-decoration:none;transition:color .2s ease;
+    }
+    .nav-links a:hover{color:var(--accent)}
+    main{max-width:1120px;margin:0 auto;padding:0 1.4rem}
 
-    p.lead {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
+    section{padding:5rem 0;border-top:1px solid var(--line)}
+    .eye{
+      text-align:center;margin:6rem 0 3rem;
+    }
+    .eye h1{
+      font-size:clamp(2.4rem,6vw,3.8rem);font-weight:800;letter-spacing:-.02em;
+      background:linear-gradient(90deg,var(--ink),var(--accent));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .eye p{
+      color:var(--muted);max-width:680px;margin:1rem auto 0;font-size:1.1rem;
     }
 
-    .cta {
-      display: inline-block;
-      padding: .9rem 2.2rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #0f172a;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      text-decoration: none;
-      transition: transform .2s ease, box-shadow .2s ease;
-      box-shadow: 0 8px 30px rgba(56, 189, 248, .3);
+    .hero-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+      margin-top:1.5rem;
     }
-    .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(129, 140, 248, .45); }
+    .hero-text h2{
+      font-size:1.8rem;font-weight:700;margin:.5rem 0 .75rem;
+    }
+    .hero-text p{color:var(--muted);max-width:520px}
+    .cta-group{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.8rem 1.4rem;border-radius:12px;font-weight:600;font-size:.95rem;
+      text-decoration:none;border:1px solid transparent;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+      cursor:pointer;background:var(--panel);
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#06121f}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(110,231,255,.3)}
+    .btn-ghost{border-color:var(--line);color:var(--ink)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 
-    .card-row {
-      display: flex;
-      gap: 1rem;
-      margin-top: 3rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    .avatar{
+      width:100%;aspect-ratio:4/5;
+      border-radius:18px;
+      background:linear-gradient(135deg,#1e2a44,#0d1226);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--muted);font-size:.9rem;
+      border:1px solid var(--line);
+      position:relative;overflow:hidden;
     }
-    .card {
-      flex: 1 1 160px;
-      max-width: 200px;
-      padding: 1.2rem;
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      transition: background .2s ease;
+    .avatar::after{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(circle at 30% 20%,rgba(110,231,255,.25),transparent 60%);
+      pointer-events:none;
     }
-    .card:hover { background: rgba(255,255,255,.08); }
-    .card .icon { font-size: 1.6rem; margin-bottom: .5rem; }
-    .card h3 { font-size: .95rem; margin-bottom: .3rem; }
-    .card p { font-size: .8rem; color: var(--muted); line-height: 1.4; }
 
-    footer {
-      position: relative;
-      z-index: 1;
-      margin-top: 3rem;
-      padding: 1.5rem;
-      font-size: .8rem;
-      color: var(--muted);
+    .feature-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;
+      margin-top:2.5rem;
     }
+    .feature{
+      background:var(--panel);border:1px solid var(--line);border-radius:14px;
+      padding:1.4rem;
+    }
+    .feature .ico{font-size:1.7rem;margin-bottom:.7rem}
+    .feature h3{font-size:1.05rem;margin-bottom:.4rem}
+    .feature p{color:var(--muted);font-size:.9rem;line-height:1.55}
+
+    .card{
+      background:var(--panel);border:1px solid var(--line);border-radius:14px;
+      padding:1.4rem;display:flex;gap:1rem;align-items:flex-start;
+      transition:border-color .2s ease,transform .2s ease;
+    }
+    .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .card .tag{
+      display:inline-block;padding:.2rem .6rem;border-radius:8px;
+      font-size:.75rem;font-weight:600;background:rgba(110,231,255,.12);
+      color:var(--accent);margin-bottom:.6rem;
+    }
+    .card h3{font-size:1.05rem;margin-bottom:.4rem}
+    .card p{color:var(--muted);font-size:.9rem;line-height:1.55}
+
+    .stats{
+      display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
+      margin:3rem 0 1rem;
+    }
+    .stat{
+      text-align:center;padding:.6rem 1.4rem;
+      background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    }
+    .stat .num{font-size:1.7rem;font-weight:800;color:var(--accent)}
+    .stat .label{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+
+    .form-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+      max-width:780px;margin:1.2rem auto 0;
+    }
+    .field{display:flex;flex-direction:column;gap:.4rem}
+    .field.full{grid-column:1/-1}
+    label{font-size:.9rem;color:var(--muted)}
+    input,textarea{
+      background:#0a0e1c;border:1px solid var(--line);color:var(--ink);
+      padding:.8rem 1rem;border-radius:10px;font:inherit;
+      outline:none;transition:border-color .2s ease,box-shadow .2s ease;
+    }
+    input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(110,231,255,.15)}
+    textarea{resize:vertical;min-height:120px}
+    .submit{
+      margin-top:1.2rem;background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#06121f;border:none;cursor:pointer;font-weight:700;
+      padding:.85rem 1.4rem;border-radius:12px;font-size:1rem;
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .submit:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(110,231,255,.3)}
+
+    footer{
+      border-top:1px solid var(--line);padding:2.2rem 0;margin-top:3rem;
+      text-align:center;color:var(--muted);font-size:.85rem;
+    }
+    .links-social{
+      list-style:none;display:flex;justify-content:center;gap:1.2rem;margin-bottom:.8rem;
+    }
+    .links-social a{
+      color:var(--muted);text-decoration:none;transition:color .2s ease;
+    }
+    .links-social a:hover{color:var(--accent)}
+
+    @media (max-width:760px){
+      .hero-grid{grid-template-columns:1fr;gap:1.5rem}
+      .nav-links{display:none}
+      .form-grid{grid-template-columns:1fr}
+    }
+
+    .hide{display:none}
   </style>
 </head>
 <body>
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
-
-  <main>
-    <span class="badge">✨ Nouveau</span>
-    <h1>Bienvenue sur votre page</h1>
-    <p class="lead">Une page moderne, rapide et élégante. Prête à accueillir votre contenu et vos publicités.</p>
-    <a href="#" class="cta">Commencer</a>
-
-    <div class="card-row">
-      <div class="card">
-        <div class="icon">⚡</div>
-        <h3>Rapide</h3>
-        <p>Chargement instantané, aucune dépendance.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📱</div>
-        <h3>Responsive</h3>
-        <p>S'adapte à tous les écrans, mobile et PC.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>Moderne</h3>
-        <p>Design épuré avec effets de lumière.</p>
-      </div>
+  <nav aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Danny — accueil">
+        <span class="dot" aria-hidden="true"></span>
+        Danny
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
+  </nav>
+
+  <main id="top">
+
+    <section aria-labelledby="hero-heading">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="tagline" style="color:var(--accent);letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;font-weight:700">Profil · Portfolio · Contact</p>
+          <h2 id="hero-heading" style="font-size:clamp(2rem,5vw,2.6rem);font-weight:800;letter-spacing:-.01em;margin-top:.6rem">Bienvenue sur mon espace</h2>
+          <p>Développeur et responsable de projet, je construis des interfaces claires, fiables et pensées pour les équipes comme pour les utilisateurs.</p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#contact">Bonne prise de contact</a>
+            <a class="btn btn-ghost" href="#realisations">Voir mes travaux</a>
+          </div>
+        </div>
+        <div class="avatar" role="img" aria-label="Photo de profil de Danny">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+            <circle cx="40" cy="30" r="15" stroke="#9da3c2" stroke-width="2"/>
+            <path d="M12 64c0-16 11.8-24.5 28-24.5s28 8.5 28 24.5" stroke="#9da3c2" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stat"><div class="num">6+</div><div class="label">Années d'expérience</div></div>
+        <div class="stat"><div class="num">40+</div><div class="label">Projets livrés</div></div>
+        <div class="stat"><div class="num">12</div><div class="label">Clients accompagnés</div></div>
+        <div class="stat"><div class="num">100%</div><div class="label">Sites déployés & maintenus</div></div>
+      </div>
+    </section>
+
+    <section id="a-propos" aria-labelledby="apropos-heading">
+      <div class="eye">
+        <h2 id="apropos-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Qui je suis</h2>
+        <p>Je combine conception produit, développement frontend et coordination technique pour transformer une idée en site ou application fonctionnelle, sans perdre de vue la qualité et la clarté.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">🎨</div>
+          <h3>Design & UI</h3>
+          <p>Hiérarchie visuelle propre, Navigation fluide, Expérience cohérente sur mobile et desktop.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">⚙️</div>
+          <h3>Développement</h3>
+          <p>HTML, CSS et JavaScript modernes, déploiement GitHub Pages, maintenance et évolutions continues.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">🤝</div>
+          <h3>Accompagnement</h3>
+          <p>Structuration du projet, définition des priorités, livraison progressive et suivi post-lancement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" aria-labelledby="services-heading">
+      <div class="eye">
+        <h2 id="services-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Ce que je propose</h2>
+        <p>Des prestations précises, adaptées aux besoins réels plutôt qu'à un catalogue générique.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">🌐</div>
+          <h3>Site vitrine / Portfolio</h3>
+          <p>Site rapide, responsive et facile à mettre à jour, parfait pour se présenter ou présenter une activité.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">📱</div>
+          <h3>Refonte interface</h3>
+          <p>Nettoyage du visuel, amélioration de la lisibilité et des parcours utilisateurs existants.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">📈</div>
+          <h3>Optimisation & déploiement</h3>
+          <p>Réduction du poids, correction des points bloquants et mise en production sur GitHub Pages.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">🛠️</div>
+          <h3>Support & maintien</h3>
+          <p>Ajustements, corrections et petites évolutions après la mise en ligne.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="realisations" aria-labelledby="realisations-heading">
+      <div class="eye">
+        <h2 id="realisations-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Quelques réalisations</h2>
+        <p>Une sélection de projets récents, conçus pour être à la fois utiles et visuellement cohérents.</p>
+      </div>
+
+      <div class="card">
+        <span class="tag">Portfolio</span>
+        <div>
+          <h3>Site personnel moderne</h3>
+          <p>Page d'accueil épurée, navigation fluide, adaptée aux appareils mobiles et aux lecteurs d'écran.</p>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag">Web · Responsive</span>
+        <div>
+          <h3>Interface administrateur</h3>
+          <p>Tableau de bord clair, avec une mise en page modulaire et une navigation optimisée.</p>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag">Déploiement</span>
+        <div>
+          <h3>Publication GitHub Pages</h3>
+          <p>Configuration simple, rendu fiable, mise à jour continue sans serveur intermédiaire.</p>
+        </div>
+      </div>
+
+      <div class="stats" style="margin-top:2rem">
+        <div class="stat"><div class="num">Front-end</div><div class="label">HTML / CSS / JS</div></div>
+        <div class="stat"><div class="num">Design</div><div class="label">UI · UX · Accessibilité</div></div>
+        <div class="stat"><div class="num">DevOps léger</div><div class="label">Git · GitHub Pages</div></div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="eye">
+        <h2 id="contact-heading" style="font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em">Contact</h2>
+        <p>Envoyez-moi un message pour un projet, une question ou un premier échange.</p>
+      </div>
+      <form class="form-grid" action="https://formspree.io/f/votre-id" method="post">
+        <div class="field">
+          <label for="cf-name">Nom</label>
+          <input id="cf-name" name="name" type="text" required placeholder="Votre nom" />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" required placeholder="vous@exemple.fr" />
+        </div>
+        <div class="field full">
+          <label for="cf-subject">Sujet</label>
+          <input id="cf-subject" name="subject" type="text" placeholder="Projet, question, accompagnement..." />
+        </div>
+        <div class="field full">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required placeholder="Dites-moi brièvement ce dont vous avez besoin."></textarea>
+        </div>
+        <div class="field full" style="justify-content:flex-end">
+          <button class="submit" type="submit">Envoyer le message</button>
+        </div>
+      </form>
+      <p style="text-align:center;color:var(--muted);font-size:.82rem;margin-top:.6rem">
+        En attendant la configuration du formulaire, vous pouvez aussi me joindre par email.
+      </p>
+    </section>
+
+    <footer>
+      <ul class="links-social">
+        <li><a href="mailto:danny@exemple.fr">Email</a></li>
+        <li><a href="https://github.com/kingdannydushime1" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+      <p>© 2026 Danny — Site personnel · Tous droits réservés</p>
+    </footer>
   </main>
 
-  <footer>© 2026 — Tous droits réservés</footer>
+  <script>
+    (function(){
+      const submit = document.querySelector('.submit');
+      const form = document.querySelector('form');
+      if(submit && form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          submit.textContent = 'Message envoyé ✓';
+          submit.style.background = 'linear-gradient(90deg,#4ade80,#2dd4bf)';
+          setTimeout(function(){
+            submit.textContent = 'Envoyer le message';
+            submit.style.background = '';
+            form.reset();
+          }, 2200);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
