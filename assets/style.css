@@ -282,10 +282,6 @@ figcaption{
 .colophon a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--hairline)}
 .colophon a:hover{text-decoration-color:var(--ink)}
 
-.pub{
-  margin:2.5rem auto 0;max-width:728px;text-align:center;
-}
-
 @media (max-width:760px){
   .une{grid-template-columns:1fr}
   li.entry{grid-template-columns:2.4rem minmax(0,1fr)}
@@ -299,11 +295,12 @@ figcaption{
   *{transition:none!important;animation:none!important}
 }
 
-/* ——— Emplacement publicitaire (bandeau haut, au-dessus de la barre) ——— */
+/* ——— Emplacement publicitaire (juste sous la barre de navigation) ———
+   Contient l'unité AADS (iframe acceptable.a-ads.com). */
 .ad-slot{
   background:var(--paper);
+  border-top:1px solid var(--hairline);
   border-bottom:1px solid var(--hairline);
-  min-height:100px;
   display:flex;
   align-items:center;
   justify-content:center;
