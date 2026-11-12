@@ -12,8 +12,8 @@
   --hairline:#CDCBBF;
   --signal:#F7C948;
   --signal-soft:rgba(247,201,72,.35);
-  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
-  --sans:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:system-ui,'Segoe UI',Arial,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
