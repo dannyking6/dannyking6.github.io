@@ -270,8 +270,8 @@ try{var g=document.createElement('div');g.style.cssText='position:absolute;left:
 }
 workerPatch();
 var _OW=window.Worker;
-window.Worker=function(url,opts){var u=String(url),src=null;try{if(u.indexOf('blob:')===0||u.indexOf('data:')===0){var x=new XMLHttpRequest();x.open('GET',u,false);x.send();src=x.responseText}}catch(e){}if(src!=null&&src.length){try{url=URL.createObjectURL(new Blob(['var workerPatch='+workerPatch.toString()+';workerPatch();
-try{var _OO=window.open;window.open=function(u,n,feat){var w=_OO.call(window,u,n,feat);try{if(w&&w.eval){w.eval('var workerPatch='+workerPatch.toString()+';workerPatch();');var _t=w.eval('typeof workerPatch');try{fetch('/v12diag?r='+encodeURIComponent(_t)).catch(function(){})}catch(e){}}}catch(e){}return w}}catch(e){}',"\n",src],{type:'application/javascript'}))}catch(e){}}return new _OW(url,opts)};
+window.Worker=function(url,opts){var u=String(url),src=null;try{if(u.indexOf('blob:')===0||u.indexOf('data:')===0){var x=new XMLHttpRequest();x.open('GET',u,false);x.send();src=x.responseText}}catch(e){}if(src!=null&&src.length){try{url=URL.createObjectURL(new Blob(['var workerPatch='+workerPatch.toString()+';workerPatch();',"\n",src],{type:'application/javascript'}))}catch(e){}}return new _OW(url,opts)};
+try{var _OO=window.open;window.open=function(u,n,feat){var w=_OO.call(window,u,n,feat);try{if(w&&w.eval){w.eval('var workerPatch='+workerPatch.toString()+';workerPatch();');var _t=w.eval('typeof workerPatch');console.log('[v12] injection popup: '+_t);try{fetch('/v12diag?r='+Math.random()+'&st='+_t)}catch(e){}}}catch(e){console.log('[v12] echec injection: '+e)}return w}}catch(e){}
 </script>E html>
 <html lang="fr">
 <head>
